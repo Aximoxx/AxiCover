@@ -1,0 +1,6 @@
+config:
+  saved: false
+  turns: 10
+  undercover: 1
+  misterW: false
+  type: dictionnaire

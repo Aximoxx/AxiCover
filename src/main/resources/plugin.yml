@@ -1,0 +1,13 @@
+name: AxiCover
+description: $description
+version: '${version}'
+
+main: fr.Aximoxx.axiCover.Main
+api-version: '1.21'
+
+authors: [ Aximox ]
+commands:
+  config:
+    description: Commande d'intéraction pour la config
+  uc:
+    description: Commandes pour le jeu
