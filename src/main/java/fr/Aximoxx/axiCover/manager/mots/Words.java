@@ -282,7 +282,7 @@ public enum Words {
         return filtered[random.nextInt(filtered.length)];
     }
 
-    public String getCivil() { return civil; }
     public String getType() { return type; }
+    public String getCivil() { return civil; }
     public String getUndercover() { return undercover; }
 }

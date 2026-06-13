@@ -1,4 +1,4 @@
-package fr.Aximoxx.axiCover.listener;
+package fr.Aximoxx.axiCover.listener.gameListener;
 
 import fr.Aximoxx.axiCover.Main;
 import fr.Aximoxx.axiCover.gui.VoteGUI;
@@ -20,7 +20,6 @@ public class InteractListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        if (e.getClickedBlock() == null) return;
         if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (e.getItem() == null || !e.getItem().hasItemMeta() || !e.getItem().getItemMeta().hasDisplayName()) return;
 
@@ -55,9 +54,10 @@ public class InteractListener implements Listener {
 
                 e.getItem().setAmount(0);
                 Main.getInstance().getGameManager().getTurnPassed().add(p.getUniqueId());
+                p.playSound(p.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1f, 1f);
 
                 if (Main.getInstance().getGameManager().getTurnPassed().size() >= Main.getInstance().getGameManager().getPlayerPlaying().size()) {
-                    Main.getInstance().getGameManager().checkWin();
+                    Main.getInstance().getCheckWinManager().checkWinWithVote();
                     return;
                 }
 
@@ -68,10 +68,19 @@ public class InteractListener implements Listener {
                 Player nextPlayer = Bukkit.getPlayer(nextPlayerId);
                 if (nextPlayer != null)
                     nextPlayer.getInventory().setItem(0, new ItemBuilder(Material.ARROW).name("§cTermine ton tour").build());
+
+                for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
+                    Player pl = Bukkit.getPlayer(id);
+                    if (pl != null) {
+                        pl.sendMessage("§7C'est au tour de §6§l" + nextPlayer.getName());
+                        pl.playSound(pl.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1f, 1f);
+                    }
+                }
                 break;
 
             case COMPASS:
                 if (!e.getItem().getItemMeta().getDisplayName().equals("§7Sur qui portera ton vote ?")) return;
+                e.getItem().setAmount(0);
 
                 new VoteGUI(p).open(p);
                 break;

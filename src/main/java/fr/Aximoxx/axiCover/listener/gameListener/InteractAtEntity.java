@@ -1,4 +1,4 @@
-package fr.Aximoxx.axiCover.listener;
+package fr.Aximoxx.axiCover.listener.gameListener;
 
 import fr.Aximoxx.axiCover.Main;
 import org.bukkit.*;

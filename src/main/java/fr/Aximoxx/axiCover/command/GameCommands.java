@@ -77,22 +77,25 @@ public class GameCommands implements CommandExecutor {
 
                 String guess = args[1];
 
-                for (Player pls : Bukkit.getOnlinePlayers()) {
-                    if (guess.equalsIgnoreCase(Main.getInstance().getGameManager().getCurrentCivilWord())) {
-                        Main.getInstance().getGameManager().onEnd(pls);
-                        Main.getInstance().getGameManager().getTask().cancel();
-                        Main.getInstance().getGameManager().getTask().cancel();
-                        p.sendMessage("§fM. White§7 a gagné !");
-                        pls.sendTitle("§fM. White §7a trouvé(e) le mot !", "§7Le mot était §2§l" + Main.getInstance().getGameManager().getCurrentCivilWord(), 10, 40, 10);
-                        pls.playSound(pls.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1f);
-                    } else {
-                        Main.getInstance().getGameManager().getTask().cancel();
-                        Main.getInstance().getGameManager().startNextRound();
+                if (guess.equalsIgnoreCase(Main.getInstance().getGameManager().getCurrentCivilWord())) {
+                    Main.getInstance().getGameManager().getTask().cancel();
+                    for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
+                        Player pls = Bukkit.getPlayer(id);
+                        if (pls != null) {
+                            Main.getInstance().getGameManager().onEnd();
+                            pls.sendMessage("");
+                            pls.sendMessage("§fM. White§7 a gagné !");
+                            pls.sendMessage("");
+                            pls.sendTitle("§fM. White §7a trouvé(e) le mot !", "§7Le mot était §2§l" + Main.getInstance().getGameManager().getCurrentCivilWord(), 10, 40, 10);
+                            pls.playSound(pls.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.7f, 1f);
+                        }
                     }
+                } else {
+                    Main.getInstance().getGameManager().getTask().cancel();
+                    Main.getInstance().getNextRoundManager().startNextRound();
                 }
 
                 break;
-
         }
 
         return false;

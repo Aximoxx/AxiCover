@@ -24,7 +24,7 @@ public class ConfigCommands implements CommandExecutor {
         switch (args[0]){
             case "test":
                 p.sendMessage("stop");
-                Main.getInstance().getGameManager().checkWin();
+                Main.getInstance().getCheckWinManager().checkWinWithVote();
                 break;
             case "test1":
                 p.sendMessage("cacaprout");

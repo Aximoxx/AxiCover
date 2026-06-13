@@ -3,7 +3,15 @@ package fr.Aximoxx.axiCover;
 import fr.Aximoxx.axiCover.command.ConfigCommands;
 import fr.Aximoxx.axiCover.command.GameCommands;
 import fr.Aximoxx.axiCover.listener.*;
+import fr.Aximoxx.axiCover.listener.falseInteraction.AttackListener;
+import fr.Aximoxx.axiCover.listener.falseInteraction.BreakListener;
+import fr.Aximoxx.axiCover.listener.falseInteraction.MoveListener;
+import fr.Aximoxx.axiCover.listener.gameListener.ChatListener;
+import fr.Aximoxx.axiCover.listener.gameListener.InteractAtEntity;
+import fr.Aximoxx.axiCover.listener.gameListener.InteractListener;
 import fr.Aximoxx.axiCover.manager.GameManager;
+import fr.Aximoxx.axiCover.manager.game.*;
+import fr.Aximoxx.axiCover.manager.mots.WordManager;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,8 +23,16 @@ import java.util.List;
 
 public final class Main extends JavaPlugin {
     private static Main instance;
-    private GameManager gameManager;
     private String type = "dictionnaire";
+
+    // Manager
+    private GameManager gameManager;
+    private WordManager wordManager;
+    private VoteManager voteManager;
+    private StartManager startManager;
+    private CheckWinManager checkWinManager;
+    private NextRoundManager nextRoundManager;
+    private WhiteGuessManager whiteGuessManager;
 
     List<String> serialized = new ArrayList<>();
     private final List<Location> spawns = new ArrayList<>();
@@ -30,6 +46,13 @@ public final class Main extends JavaPlugin {
         FastInvManager.register(this);
 
         gameManager = new GameManager();
+        wordManager = new WordManager();
+        voteManager = new VoteManager();
+        startManager = new StartManager();
+        checkWinManager = new CheckWinManager();
+        nextRoundManager = new NextRoundManager();
+        whiteGuessManager = new WhiteGuessManager();
+
         getCommand("config").setExecutor(new ConfigCommands());
         getCommand("uc").setExecutor(new GameCommands());
 
@@ -38,10 +61,12 @@ public final class Main extends JavaPlugin {
     }
 
     private void registerListeners() {
-        getServer().getPluginManager().registerEvents(new ChatListener(), this);
-        getServer().getPluginManager().registerEvents(new JoinListener(), this);
-        getServer().getPluginManager().registerEvents(new BreakListener(), this);
-        getServer().getPluginManager().registerEvents(new LeaveListener(), this);
+        getServer().getPluginManager().registerEvents(new ChatListener(),     this);
+        getServer().getPluginManager().registerEvents(new JoinListener(),     this);
+        getServer().getPluginManager().registerEvents(new MoveListener(),     this);
+        getServer().getPluginManager().registerEvents(new BreakListener(),    this);
+        getServer().getPluginManager().registerEvents(new LeaveListener(),    this);
+        getServer().getPluginManager().registerEvents(new AttackListener(),   this);
         getServer().getPluginManager().registerEvents(new InteractListener(), this);
         getServer().getPluginManager().registerEvents(new InteractAtEntity(), this);
     }
@@ -74,10 +99,16 @@ public final class Main extends JavaPlugin {
         saveSpawn();
     }
 
-    public String           getType()        { return type; }
-    public List<Location>   getSpawns()      { return spawns; }
-    public static Main      getInstance()    { return instance; }
-    public GameManager      getGameManager() { return gameManager; }
+    public String            getType()              { return type; }
+    public List<Location>    getSpawns()            { return spawns; }
+    public static Main       getInstance()          { return instance; }
+    public GameManager       getGameManager()       { return gameManager; }
+    public WordManager       getWordManager()       { return wordManager; }
+    public VoteManager       getVoteManager()       { return voteManager; }
+    public StartManager      getStartManager()      { return startManager; }
+    public CheckWinManager   getCheckWinManager()   { return checkWinManager; }
+    public NextRoundManager  getNextRoundManager()  { return nextRoundManager; }
+    public WhiteGuessManager getWhiteGuessManager() { return whiteGuessManager; }
 
     public void setType(String type) { this.type = type; }
 }

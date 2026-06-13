@@ -126,16 +126,21 @@ public class ConfigGUI extends FastInv {
             e.setCancelled(true);
 
             if (e.getClick() == ClickType.LEFT) {
-                Main.getInstance().getConfig().set(configMisterWPath, true);
-            } else if (e.getClick() == ClickType.RIGHT) Main.getInstance().getConfig().set(configMisterWPath, false);
+                if (Main.getInstance().getGameManager().getPlayers().size() <= 3){
+                    p.sendMessage("§c§lERREUR§7, Il n'y a pas assez de joueur ! §c" + Main.getInstance().getGameManager().getPlayers().size() + "§7/§24");
+                    p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+                    return;
+                }
 
-            p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
+                Main.getInstance().getConfig().set(configMisterWPath, true);
+                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
+            } else if (e.getClick() == ClickType.RIGHT) Main.getInstance().getConfig().set(configMisterWPath, false); p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
 
             Main.getInstance().saveConfig();
             init(p);
         });
 
-        setItem(22, new ItemBuilder(Material.IRON_CHAIN).name("§fNbrs de §7Tours").lore(lore1, "",
+        setItem(23, new ItemBuilder(Material.IRON_CHAIN).name("§fNbrs de §7Tours").lore(lore1, "",
                 "§7Nombre de Tours actuel: §6" + Main.getInstance().getConfig().getInt(configTurnsPath)).build(), e -> {
             e.setCancelled(true);
 
@@ -165,9 +170,9 @@ public class ConfigGUI extends FastInv {
             init(p);
         });
 
-        setItem(23, new ItemBuilder(Main.getInstance().getConfig().getString(configWordType).equals("dictionnaire") ? Material.BOOK : Material.GRASS_BLOCK)
+        setItem(24, new ItemBuilder(Main.getInstance().getConfig().getString(configWordType).equals("dictionnaire") ? Material.BOOK : Material.GRASS_BLOCK)
                 .name("§fType de mot").lore(typeLore, "",
-                        ("§7Dictionnaire Actuel: " + (Main.getInstance().getConfig().getString(configWordType).equals("dictionnaire") ? "§f§lLangue §9§lFra§f§lnça§c§lise" : "§a§lMin§6§lecraft"))).build(), e -> {
+                        ("§7Dictionnaire Actuel: " + (Main.getInstance().getConfig().getString(configWordType).equals("dictionnaire") ? "§9§lFr§f§lan§c§lce" : "§a§lMin§6§lecraft"))).build(), e -> {
 
             String currentType = Main.getInstance().getConfig().getString(configWordType);
 
@@ -176,21 +181,21 @@ public class ConfigGUI extends FastInv {
                     Main.getInstance().getConfig().set(configWordType, "minecraft");
                     Main.getInstance().saveConfig();
 
-                    p.sendMessage("§7Vous avez choisi les mots en rapport avec §a§lMin§6§lecraft §7!");
+                    p.sendMessage("§7Vous avez choisi les mots du dictionnaire §a§lMin§6§lecraft §7!");
                     break;
 
                 case "minecraft":
                     Main.getInstance().getConfig().set(configWordType, "dictionnaire");
                     Main.getInstance().saveConfig();
 
-                    p.sendMessage("§7Vous avez choisi les mots de la §flangue §9§lfra§f§lça§c§lise §7!");
+                    p.sendMessage("§7Vous avez choisi les mots du dictionnaire §9§lFra§f§lnc§c§lais §7!");
                     break;
 
                 case null, default:
                     Main.getInstance().getConfig().set(configWordType, "dictionnaire");
                     Main.getInstance().saveConfig();
 
-                    p.sendMessage("§7Une §cerreur§7 c'est produite. La §flangue §9§lfra§f§lça§c§lise§7 a été choisi par défaut.");
+                    p.sendMessage("§7Une §cerreur§7 c'est produite. Le dictionnaire §9§lFra§f§lnc§c§lais§7 a été choisi par défaut.");
                     break;
             }
 
@@ -200,7 +205,7 @@ public class ConfigGUI extends FastInv {
 
         setItem(40, new ItemBuilder(Material.LIME_BANNER).name("§aDémarrer la partie").lore("", "§7§oPrêt à vous amusez ?").build(), e -> {
             p.closeInventory();
-            Main.getInstance().getGameManager().onStart(p);
+            Main.getInstance().getStartManager().onStart(p);
         });
     }
 
@@ -294,7 +299,7 @@ public class ConfigGUI extends FastInv {
 
                         ArmorStand stand = loc.getWorld().spawn(loc, ArmorStand.class);
                         stand.getWorld().spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, stand.getLocation().add(0, 0.5, 0), 25, 0.4, 1, 0.4, 0);
-                        p.playSound(p.getLocation(), Sound.BLOCK_LAVA_EXTINGUISH, 0.4f, 1f);
+                        p.playSound(p.getLocation(), Sound.BLOCK_WOOD_BREAK, 1f ,1f);
 
                         stand.setMetadata("TAG", new FixedMetadataValue(Main.getInstance(), false));
                         stand.setArms(false);

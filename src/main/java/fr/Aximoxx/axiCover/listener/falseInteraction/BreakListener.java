@@ -1,4 +1,4 @@
-package fr.Aximoxx.axiCover.listener;
+package fr.Aximoxx.axiCover.listener.falseInteraction;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
