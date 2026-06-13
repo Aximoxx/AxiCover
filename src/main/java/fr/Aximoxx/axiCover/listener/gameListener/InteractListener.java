@@ -72,7 +72,7 @@ public class InteractListener implements Listener {
                 for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
                     Player pl = Bukkit.getPlayer(id);
                     if (pl != null) {
-                        pl.sendMessage("§7C'est au tour de §6§l" + nextPlayer.getName());
+                        pl.sendMessage("§7C'est au tour de §6§l" + nextPlayer.getName() + " §7!");
                         pl.playSound(pl.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1f, 1f);
                     }
                 }

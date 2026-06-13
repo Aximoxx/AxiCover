@@ -7,7 +7,7 @@ import fr.Aximoxx.axiCover.listener.falseInteraction.AttackListener;
 import fr.Aximoxx.axiCover.listener.falseInteraction.BreakListener;
 import fr.Aximoxx.axiCover.listener.falseInteraction.MoveListener;
 import fr.Aximoxx.axiCover.listener.gameListener.ChatListener;
-import fr.Aximoxx.axiCover.listener.gameListener.InteractAtEntity;
+import fr.Aximoxx.axiCover.listener.gameListener.InteractAtEntityListener;
 import fr.Aximoxx.axiCover.listener.gameListener.InteractListener;
 import fr.Aximoxx.axiCover.manager.GameManager;
 import fr.Aximoxx.axiCover.manager.game.*;
@@ -68,7 +68,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new LeaveListener(),    this);
         getServer().getPluginManager().registerEvents(new AttackListener(),   this);
         getServer().getPluginManager().registerEvents(new InteractListener(), this);
-        getServer().getPluginManager().registerEvents(new InteractAtEntity(), this);
+        getServer().getPluginManager().registerEvents(new InteractAtEntityListener(), this);
     }
 
     public void loadSpawns() {

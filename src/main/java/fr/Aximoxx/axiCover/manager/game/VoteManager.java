@@ -55,7 +55,7 @@ public class VoteManager {
         if (Main.getInstance().getGameManager().getVoteMap().isEmpty()){
             for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
                 Player p = Bukkit.getPlayer(id);
-                if (p != null) p.sendMessage("§c§lAucun vote§7 n'a été recensé. Passage à la prochaine manche.");
+                if (p != null) p.sendMessage("§c§lAucun vote§7 n'a été recensé.", "§7Passage à la prochaine manche.");
             }
             Main.getInstance().getNextRoundManager().startNextRound();
             return;
