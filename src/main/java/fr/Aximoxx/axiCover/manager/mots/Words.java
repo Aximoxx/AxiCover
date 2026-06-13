@@ -23,7 +23,7 @@ public enum Words {
     HIBOU("Hibou", "Chouette", "dictionnaire"),
     RENARD("Renard", "Blaireau", "dictionnaire"),
 
-    // dictionnaire
+    // Nourriture
     BAGUETTE("Baguette", "Croissant", "dictionnaire"),
     FROMAGE("Fromage", "Beurre", "dictionnaire"),
     CREPE("Crêpe", "Gaufre", "dictionnaire"),
@@ -40,7 +40,7 @@ public enum Words {
     CAMEMBERT("Camembert", "Brie", "dictionnaire"),
     ESCARGOT("Escargot", "Moule", "dictionnaire"),
 
-    // dictionnaire
+    // Nature
     FORET("Forêt", "Jungle", "dictionnaire"),
     MONTAGNE("Montagne", "Colline", "dictionnaire"),
     RIVIERE("Rivière", "Ruisseau", "dictionnaire"),
@@ -57,7 +57,7 @@ public enum Words {
     VALLEE("Vallée", "Plaine", "dictionnaire"),
     TOURBILLON("Tourbillon", "Tempête", "dictionnaire"),
 
-    // dictionnaires du quotidien
+    // Objets du quotidien
     MIROIR("Miroir", "Vitre", "dictionnaire"),
     HORLOGE("Horloge", "Pendule", "dictionnaire"),
     FENETRE("Fenêtre", "Porte", "dictionnaire"),
@@ -74,7 +74,7 @@ public enum Words {
     BOUCLIER("Bouclier", "minecraft", "dictionnaire"),
     EPEE("Épée", "Dague", "dictionnaire"),
 
-    // dictionnaires
+    // Métiers
     BOULANGER("Boulanger", "Pâtissier", "dictionnaire"),
     FORGERON("Forgeron", "Charpentier", "dictionnaire"),
     PECHEUR("Pêcheur", "Chasseur", "dictionnaire"),
@@ -86,7 +86,7 @@ public enum Words {
     BERGER("Berger", "Fermier", "dictionnaire"),
     PIRATE("Pirate", "Corsaire", "dictionnaire"),
 
-    // dictionnairex
+    // Lieux
     CHATEAU("Château", "Forteresse", "dictionnaire"),
     VILLAGE("Village", "Hameau", "dictionnaire"),
     MARCHE("Marché", "Bazar", "dictionnaire"),
@@ -103,7 +103,7 @@ public enum Words {
     PALAIS("Palais", "Manoir", "dictionnaire"),
     CIMETIERE("Cimetière", "Mausolée", "dictionnaire"),
 
-    // dictionnaires / accessoires
+    // Vêtements / accessoires
     CHAPEAU("Chapeau", "Casquette", "dictionnaire"),
     MANTEAU("Manteau", "Cape", "dictionnaire"),
     BOTTES("Bottes", "Sandales", "dictionnaire"),
@@ -115,7 +115,7 @@ public enum Words {
     TABLIER("Tablier", "Sarrau", "dictionnaire"),
     COLLIER("Collier", "Pendentif", "dictionnaire"),
 
-    // Actions / dictionnaires
+    // Actions / concepts
     VOYAGE("Voyage", "Aventure", "dictionnaire"),
     ENIGME("Énigme", "Mystère", "dictionnaire"),
     TRESOR("Trésor", "Butin", "dictionnaire"),
@@ -129,7 +129,7 @@ public enum Words {
 
     // ─── 150 mots Minecraft ──────────────────────────────────────────────────
 
-    // minecrafts communs
+    // Blocs communs
     COBBLESTONE("Cobblestone", "Gravel", "minecraft"),
     DIRT("Dirt", "Coarse Dirt", "minecraft"),
     SAND("Sand", "Red Sand", "minecraft"),
@@ -146,19 +146,19 @@ public enum Words {
     SOULSAND("Soul Sand", "Soul Soil", "minecraft"),
     ENDSTONE("End Stone", "Purpur minecraftk", "minecraft"),
 
-    // minecrafts
+    // Minerais
     COAL("Coal", "Charcoal", "minecraft"),
     IRON("Iron", "Gold", "minecraft"),
     DIAMOND("Diamond", "Emerald", "minecraft"),
     LAPIS("Lapis", "Amethyst", "minecraft"),
-    minecraft("minecraft", "Observer", "minecraft"),
+    REDSTONE("Redstone", "Observer", "minecraft"),
     QUARTZ("Quartz", "Calcite", "minecraft"),
     COPPER("Copper", "Raw Copper", "minecraft"),
     NETHERITE("Netherite", "Ancient Debris", "minecraft"),
     GOLD("Gold", "Gilded Blackstone", "minecraft"),
     EMERALD("Emerald", "Diamond", "minecraft"),
 
-    // minecrafts
+    // Mobs
     CREEPER("Creeper", "Charged Creeper", "minecraft"),
     ZOMBIE("Zombie", "Drowned", "minecraft"),
     SKELETON("Skeleton", "Stray", "minecraft"),
@@ -175,7 +175,7 @@ public enum Words {
     HOGLIN("Hoglin", "Zoglin", "minecraft"),
     PIGLIN("Piglin", "Zombified Piglin", "minecraft"),
 
-    // minecrafts / armes
+    // Outils / armes
     PICKAXE("Pickaxe", "Axe", "minecraft"),
     SWORD("Sword", "Trident", "minecraft"),
     BOW("Bow", "Crossbow", "minecraft"),
@@ -187,14 +187,14 @@ public enum Words {
     ARROW("Arrow", "Spectral Arrow", "minecraft"),
     TRIDENT("Trident", "Sword", "minecraft"),
 
-    // minecrafts
+    // Armures
     HELMET("Helmet", "Turtle Shell", "minecraft"),
     CHESTPLATE("Chestplate", "Elytra", "minecraft"),
     LEGGINGS("Leggings", "Chainmail", "minecraft"),
     BOOTS("Boots", "Golden Boots", "minecraft"),
     ELYTRA("Elytra", "Chestplate", "minecraft"),
 
-    // minecrafts
+    // Structures
     DUNGEON("Dungeon", "Stronghold", "minecraft"),
     VILLAGE_MC("Village", "Pillager Outpost", "minecraft"),
     TEMPLE("Temple", "Pyramid", "minecraft"),
@@ -206,7 +206,7 @@ public enum Words {
     RUINED_PORTAL("Ruined Portal", "Bastion", "minecraft"),
     ANCIENT_CITY("Ancient City", "Deep Dark", "minecraft"),
 
-    // minecrafts
+    // Biomes
     TAIGA("Taiga", "Spruce Forest", "minecraft"),
     SAVANNA("Savanna", "Badlands", "minecraft"),
     SWAMP("Swamp", "Mangrove Swamp", "minecraft"),
@@ -218,7 +218,7 @@ public enum Words {
     CHERRY_GROVE("Cherry Grove", "Flower Forest", "minecraft"),
     DRIPSTONE("Dripstone Caves", "Lush Caves", "minecraft"),
 
-    // minecraft
+    // Redstone
     PISTON("Piston", "Sticky Piston", "minecraft"),
     DROPPER("Dropper", "Dispenser", "minecraft"),
     HOPPER("Hopper", "Chest Minecart", "minecraft"),
@@ -228,9 +228,9 @@ public enum Words {
     TRIPWIRE("Tripwire", "Pressure Plate", "minecraft"),
     TNT("TNT", "Minecart TNT", "minecraft"),
     RAIL("Rail", "Powered Rail", "minecraft"),
-    NOTEminecraftK("Note minecraftk", "Jukebox", "minecraft"),
+    NOTEBLOCK("Note Block", "Jukebox", "minecraft"),
 
-    // dictionnaire Minecraft
+    // Nourriture Minecraft
     GOLDEN_APPLE("Golden Apple", "Notch Apple", "minecraft"),
     BREAD("Bread", "Cake", "minecraft"),
     STEAK("Steak", "Porkchop", "minecraft"),
@@ -242,7 +242,7 @@ public enum Words {
     COD("Cod", "Salmon", "minecraft"),
     CHORUS_FRUIT("Chorus Fruit", "Glow Berries", "minecraft"),
 
-    // Potions / minecrafts
+    // Potions / enchantements
     SHARPNESS("Sharpness", "Smite", "minecraft"),
     PROTECTION("Protection", "Thorns", "minecraft"),
     SILK_TOUCH("Silk Touch", "Fortune", "minecraft"),
@@ -254,7 +254,7 @@ public enum Words {
     CHANNELING("Channeling", "Riptide", "minecraft"),
     SWIFT_SNEAK("Swift Sneak", "Soul Speed", "minecraft"),
 
-    // Entités / minecrafts
+    // Entités / véhicules
     BOAT("Boat", "Chest Boat", "minecraft"),
     MINECART("Minecart", "Chest Minecart", "minecraft"),
     HORSE("Horse", "Donkey", "minecraft"),
