@@ -3,6 +3,7 @@ package fr.Aximoxx.axiCover.listener.gameListener;
 import fr.Aximoxx.axiCover.Main;
 import fr.Aximoxx.axiCover.gui.VoteGUI;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,6 +47,11 @@ public class InteractListener implements Listener {
                 break;
             case ARROW:
                 if (!e.getItem().getItemMeta().getDisplayName().equals("§cTermine ton tour")) return;
+                if (Main.getInstance().getNextRoundManager().getNextPlayerId() != p.getUniqueId()) {
+                    e.getItem().setType(Material.AIR);
+                    p.sendMessage("§7Pas touche.");
+                    return;
+                }
 
                 e.getItem().setAmount(0);
                 Main.getInstance().getGameManager().getTurnPassed().add(p.getUniqueId());

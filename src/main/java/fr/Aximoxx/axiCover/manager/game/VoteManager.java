@@ -58,6 +58,8 @@ public class VoteManager {
 
     public void countVote(){
         Main.getInstance().getGameManager().getVoteBar().removeAll();
+        task.cancel();
+
         if (Main.getInstance().getGameManager().getVoteMap().isEmpty()){
             for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
                 Player p = Bukkit.getPlayer(id);

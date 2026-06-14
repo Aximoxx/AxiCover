@@ -47,18 +47,17 @@ Chaque tour : vous devez donner un mot proche du vôtre.<br>
 ## Fonctionnalité
 
 <div align="left">
-Les parties peuvent se jouer avec ou sans* chat vocal.<br>
+Les parties peuvent se jouer avec ou sans chat vocal.<br>
 Vous pouvez utiliser Discord ou Mumble.<br>
 
 Un panel de configuration vous permet de setup votre partie comme vous le désirez :
 * Point d'apparition (Ajouter, Afficher, Supprimer)
 * Nombre d'Undercover (Ajouter, Supprimer)
 * Nombre de Tours (Ajouter, Supprimer)
+* Type de partie (Vocal ou Textuelle)
 * M. White (Activer, Désactiver)
 * Sauvegarder la configuration
 * et bien plus !
-
-*_Les parties Textuelles sont en cours d'implémentation_
 </div>
 
 ---

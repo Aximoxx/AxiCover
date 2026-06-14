@@ -13,6 +13,7 @@ import java.util.UUID;
 
 public class StartManager {
     int timer = Main.getInstance().getGameManager().getStartTimer();
+
     public void onStart(Player p){
         if (Main.getInstance().getSpawns().isEmpty()) {
             p.sendMessage("§c§lERREUR§7, Aucun spawn n'est configuré !");
@@ -38,6 +39,7 @@ public class StartManager {
             return;
         }
 
+        timer = Main.getInstance().getGameManager().getStartTimer();
         new BukkitRunnable() {
             private float pitch = 1f;
             @Override

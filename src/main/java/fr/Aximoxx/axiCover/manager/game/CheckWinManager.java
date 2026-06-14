@@ -46,12 +46,12 @@ public class CheckWinManager {
                 for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
                     Player pls = Bukkit.getPlayer(id);
                     if (pls != null) {
+                        pls.sendMessage("");
+                        pls.sendMessage("§fLes §2§lCIVILS§f ont gagné !");
+                        pls.sendMessage("");
+                        pls.sendTitle("§fVictoire des §2§lCIVILS", "", 10, 40, 10);
+                        pls.playSound(pls.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.6f, 1f);
                     }
-                    pls.sendMessage("");
-                    pls.sendMessage("§fLes §2§lCIVILS§f ont gagné !");
-                    pls.sendMessage("");
-                    pls.sendTitle("§fVictoire des §2§lCIVILS", "", 10, 40, 10);
-                    pls.playSound(pls.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 0.6f, 1f);
                 }
                 Main.getInstance().getGameManager().onEnd();
             } else Main.getInstance().getVoteManager().startVotingPhase();

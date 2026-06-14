@@ -50,7 +50,23 @@ public class GameManager {
         cleanUp();
     }
 
-    private void cleanUp(){
+    public void cleanStartUp(){
+        // Nettoyage des BossBars
+        voteBar.removeAll();
+        whiteBar.removeAll();
+        playerTurnBar.removeAll();
+
+        // Nettoyage des Lists
+        turnPassed.clear();
+        playerPlaying.clear();
+
+        // Nettoyage des Maps
+        voteMap.clear();
+        playerRoles.clear();
+        playerWords.clear();
+    }
+
+    public void cleanUp(){
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), players::clear, 3L);
 
         // Nettoyage des BossBars

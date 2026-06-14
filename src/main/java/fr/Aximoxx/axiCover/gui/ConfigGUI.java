@@ -233,6 +233,7 @@ public class ConfigGUI extends FastInv {
             init(p);
         });
 
+        setItem(39, new ItemBuilder(Material.EGG).name("§fAjouter des joueurs").lore("").build(), e -> new PlayerGUI(p).open(p));
         setItem(40, new ItemBuilder(Material.LIME_BANNER).name("§aDémarrer la partie").lore("", "§7§oPrêt à vous amusez ?").build(), e -> {
             p.closeInventory();
             Main.getInstance().getStartManager().onStart(p);

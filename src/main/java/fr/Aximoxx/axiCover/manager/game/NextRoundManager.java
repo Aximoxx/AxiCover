@@ -12,12 +12,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.UUID;
 
 public class NextRoundManager {
+    UUID nextPlayerId;
     int turns = Main.getInstance().getGameManager().getTurns();
     int timer = Main.getInstance().getGameManager().getTurnTimer();
     BukkitRunnable task = Main.getInstance().getGameManager().getPlayerTurn();
 
     public void startPlayerNextTurn(){
-        UUID nextPlayerId = Main.getInstance().getGameManager().getPlayerPlaying().stream()
+        nextPlayerId = Main.getInstance().getGameManager().getPlayerPlaying().stream()
                 .filter(pls -> !Main.getInstance().getGameManager().getTurnPassed().contains(pls))
                 .findFirst().orElse(null);
 
@@ -97,5 +98,13 @@ public class NextRoundManager {
                 pls.sendMessage("§7Le round §2§l" + turns + " §7va pouvoir commencer !");
             }
         }
+    }
+
+    public UUID getNextPlayerId() {
+        return nextPlayerId;
+    }
+
+    public void setNextPlayerId(UUID nextPlayerId) {
+        this.nextPlayerId = nextPlayerId;
     }
 }

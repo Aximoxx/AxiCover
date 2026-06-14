@@ -28,6 +28,13 @@ public class ChatListener implements Listener {
                 return;
             }
 
+            if (Main.getInstance().getNextRoundManager().getNextPlayerId() != p.getUniqueId()){
+                p.sendMessage("§c§lERREUR§7, Ce n'est pas votre tour !");
+                p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+                e.setCancelled(true);
+                return;
+            }
+
             if (Main.getInstance().getGameManager().getPlayerRoles().get(p.getUniqueId()) == Roles.CIVIL
                     && e.getMessage().toLowerCase().contains(Main.getInstance().getGameManager().getCurrentCivilWord().toLowerCase())
                     || Main.getInstance().getGameManager().getPlayerRoles().get(p.getUniqueId()) == Roles.UNDERCOVER
