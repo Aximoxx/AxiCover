@@ -3,4 +3,5 @@ config:
   turns: 10
   undercover: 1
   misterW: false
+  vocal: true
   type: dictionnaire

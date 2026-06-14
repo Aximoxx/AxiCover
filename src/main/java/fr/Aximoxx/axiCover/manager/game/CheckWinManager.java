@@ -11,6 +11,14 @@ import java.util.UUID;
 public class CheckWinManager {
 
     public void checkWinWithVote() {
+        // Pour le dev qui fouille dans mon code, sache une chose..
+        // J'ai perdu 10 ans d'espérance de vie à cause de cette PUTAIN DE LIGNE.
+        if (Main.getInstance().getGameManager().isVotePhase()) return;
+
+        Main.getInstance().getGameManager().getVoteBar().removeAll();
+        Main.getInstance().getGameManager().getWhiteBar().removeAll();
+        Main.getInstance().getGameManager().getPlayerTurnBar().removeAll();
+
         long undercoverCount = Main.getInstance().getGameManager().getPlayerPlaying().stream().filter(id -> Main.getInstance().getGameManager().getPlayerRoles().get(id) == Roles.UNDERCOVER).count();
         long civilCount = Main.getInstance().getGameManager().getPlayerPlaying().stream().filter(id -> Main.getInstance().getGameManager().getPlayerRoles().get(id) == Roles.CIVIL).count();
         long misterWhiteCount = Main.getInstance().getGameManager().getPlayerPlaying().stream().filter(id -> Main.getInstance().getGameManager().getPlayerRoles().get(id) == Roles.MISTER_WHITE).count();

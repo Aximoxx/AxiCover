@@ -2,18 +2,13 @@ package fr.Aximoxx.axiCover.listener.gameListener;
 
 import fr.Aximoxx.axiCover.Main;
 import fr.Aximoxx.axiCover.gui.VoteGUI;
-import fr.mrmicky.fastinv.ItemBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import java.util.UUID;
 
 public class InteractListener implements Listener {
 
@@ -61,21 +56,8 @@ public class InteractListener implements Listener {
                     return;
                 }
 
-                UUID nextPlayerId = Main.getInstance().getGameManager().getPlayerPlaying().stream()
-                        .filter(pls -> !Main.getInstance().getGameManager().getTurnPassed().contains(pls))
-                        .findFirst().orElse(null);
-
-                Player nextPlayer = Bukkit.getPlayer(nextPlayerId);
-                if (nextPlayer != null)
-                    nextPlayer.getInventory().setItem(0, new ItemBuilder(Material.ARROW).name("§cTermine ton tour").build());
-
-                for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
-                    Player pl = Bukkit.getPlayer(id);
-                    if (pl != null) {
-                        pl.sendMessage("§7C'est au tour de §6§l" + nextPlayer.getName() + " §7!");
-                        pl.playSound(pl.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_STEP, 1f, 1f);
-                    }
-                }
+                Main.getInstance().getGameManager().getPlayerTurnBar().removeAll();
+                Main.getInstance().getNextRoundManager().startPlayerNextTurn();
                 break;
 
             case COMPASS:

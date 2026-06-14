@@ -12,23 +12,38 @@ import java.util.*;
 
 public class GameManager {
     private Words currentWord;
+
+    // Runnable
     private BukkitRunnable task;
+    private BukkitRunnable voteTask;
+    private BukkitRunnable playerTurn;
+
+    // Boolean
     private boolean playing = false;
     private boolean votePhase = false;
+    private boolean mWhiteGuess = false;
+
+    // List
     private final List<UUID> players = new ArrayList<>();
-    private final Map<UUID, UUID> voteMap = new HashMap<>();
     private final List<UUID> turnPassed = new ArrayList<>();
     private final List<UUID> playerPlaying = new ArrayList<>();
+
+    // Map
+    private final Map<UUID, UUID> voteMap = new HashMap<>();
     private final Map<UUID, Roles> playerRoles = new HashMap<>();
     private final Map<UUID, String> playerWords = new HashMap<>();
 
-    BossBar whiteBar = Bukkit.createBossBar("§fM. White est entrain de deviné le mot: ", BarColor.WHITE, BarStyle.SOLID);
+    // Bossbar
+    BossBar playerTurnBar = Bukkit.createBossBar("§fTour de: §a", BarColor.GREEN, BarStyle.SOLID);
     BossBar voteBar = Bukkit.createBossBar("§fTemps restant: §6", BarColor.GREEN, BarStyle.SOLID);
+    BossBar whiteBar = Bukkit.createBossBar("§fM. White est entrain de deviné le mot: ", BarColor.WHITE, BarStyle.SOLID);
 
+    // Int
     private int turns = 1;
-    public int start_timer = 3;
-    private int mWhite_timer = 30;
-    private boolean mWhiteGuess = false;
+    private int start_timer = 3;
+    private int vote_timer = 600;
+    private int turn_timer = 400;
+    private int mWhite_timer = 600;
 
     public void onEnd(){
         setPlaying(false);
@@ -38,12 +53,19 @@ public class GameManager {
     private void cleanUp(){
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), players::clear, 3L);
 
-        voteMap.clear();
+        // Nettoyage des BossBars
+        voteBar.removeAll();
+        whiteBar.removeAll();
+        playerTurnBar.removeAll();
+
+        // Nettoyage des Lists
         turnPassed.clear();
+        playerPlaying.clear();
+
+        // Nettoyage des Maps
+        voteMap.clear();
         playerRoles.clear();
         playerWords.clear();
-        whiteBar.removeAll();
-        playerPlaying.clear();
     }
 
     public BukkitRunnable    getTask()                   { return task; }
@@ -52,15 +74,20 @@ public class GameManager {
     public BossBar           getVoteBar()                { return voteBar; }
     public List<UUID>        getPlayers()                { return players; }
     public Map<UUID, UUID>   getVoteMap()                { return voteMap; }
+    public BukkitRunnable    getVoteTask()               { return voteTask; }
     public BossBar           getWhiteBar()               { return whiteBar; }
     public boolean           isVotePhase()               { return votePhase; }
     public List<UUID>        getTurnPassed()             { return turnPassed; }
+    public BukkitRunnable    getPlayerTurn()             { return playerTurn; }
+    public int               getTurnTimer()              { return turn_timer; }
+    public int               getVoteTimer()              { return vote_timer; }
     public boolean           ismWhiteGuess()             { return mWhiteGuess; }
     public Map<UUID, Roles>  getPlayerRoles()            { return playerRoles; }
     public Words             getCurrentWord()            { return currentWord; }
     public Map<UUID, String> getPlayerWords()            { return playerWords; }
-    public int               getStart_timer()            { return start_timer; }
-    public int               getmWhite_timer()           { return mWhite_timer; }
+    public int               getStartTimer()             { return start_timer; }
+    public int               getmWhiteTimer()            { return mWhite_timer; }
+    public BossBar           getPlayerTurnBar()          { return playerTurnBar; }
     public List<UUID>        getPlayerPlaying()          { return playerPlaying; }
     public String            getCurrentCivilWord()       { return currentWord.getCivil(); }
     public String            getCurrentUndercoverWord()  { return currentWord.getUndercover(); }

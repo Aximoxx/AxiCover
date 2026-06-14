@@ -14,8 +14,9 @@ public class LeaveListener implements Listener {
 
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
+        e.setQuitMessage(null);
         Player p = e.getPlayer();
-        e.setQuitMessage("§7[§c⏪§7]§f " + p.getName());
+        Bukkit.broadcastMessage("§7[§c⏪§7]§f " + p.getName());
 
         if (Main.getInstance().getGameManager().getPlayerPlaying().contains(p.getUniqueId())){
             Main.getInstance().getGameManager().getPlayerPlaying().remove(p.getUniqueId());
@@ -35,26 +36,30 @@ public class LeaveListener implements Listener {
                 }
             }
 
+            Main.getInstance().getGameManager().getPlayerTurnBar().removeAll();
+
             for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
                 Player pl = Bukkit.getPlayer(id);
                 if (pl != null){
                     pl.getInventory().clear();
 
-                    pl.sendMessage("§6§lWARNING§7,§c " + p.getName() + "§7 à déconnecté(e) en pleine partie.",
+                    pl.sendMessage("§6§lWARNING§7,§c " + p.getName() + "§7 s'est déconnecté(e) en pleine partie.",
                             "§7Il était " + (Main.getInstance().getGameManager().getPlayerRoles().get(p.getUniqueId()) == Roles.MISTER_WHITE ? "§f§lM. White" :
                                     Main.getInstance().getGameManager().getPlayerRoles().get(p.getUniqueId()) == Roles.UNDERCOVER ? "§c§lUndercover" : "§2§lCivil"),
-                            "§7Une vérification va commencer...");
+                            "",
+                            "§7Une vérification va commencer...",
+                            "");
                 }
             }
 
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
                 for (UUID id : Main.getInstance().getGameManager().getPlayers()) {
                     Player pl = Bukkit.getPlayer(id);
-                    if (pl != null) pl.sendMessage("§2Début§7 de la vérification...");
+                    if (pl != null) pl.sendMessage("§7Début de la §2vérification§7...");
                 }
 
                 Main.getInstance().getCheckWinManager().checkWinWithoutVote();
-            }, 10);
+            }, 20);
         }
     }
 }

@@ -2,13 +2,14 @@ package fr.Aximoxx.axiCover.manager.game;
 
 import fr.Aximoxx.axiCover.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
 public class WhiteGuessManager {
-    int timer = Main.getInstance().getGameManager().getmWhite_timer();
+    int timer = Main.getInstance().getGameManager().getmWhiteTimer();
     BukkitRunnable task = Main.getInstance().getGameManager().getTask();
 
     public void misterWhiteGuess(){
@@ -30,13 +31,15 @@ public class WhiteGuessManager {
                     return;
                 }
 
-                Main.getInstance().getGameManager().getWhiteBar().setTitle("§fTemps restant: " + timer);
-                Main.getInstance().getGameManager().getWhiteBar().setProgress(timer / 60.0);
+
+                Main.getInstance().getGameManager().getWhiteBar().setTitle(timer > 300 ? "§fTour de: §a" + timer : timer <= 60 ? "§fTour de: §c" + timer : "§fTour de: §e" + timer);
+                Main.getInstance().getGameManager().getWhiteBar().setColor(timer > 300 ? BarColor.GREEN : timer <= 60 ? BarColor.RED : BarColor.YELLOW);
+                Main.getInstance().getGameManager().getWhiteBar().setProgress((double) timer / Main.getInstance().getGameManager().getmWhiteTimer());
 
                 timer--;
             }
         };
 
-        Main.getInstance().getGameManager().getTask().runTaskTimer(Main.getInstance(), 0, 20L);
+        Main.getInstance().getGameManager().getTask().runTaskTimer(Main.getInstance(), 0, 1L);
     }
 }

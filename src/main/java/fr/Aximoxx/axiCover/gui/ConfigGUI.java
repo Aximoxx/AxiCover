@@ -17,6 +17,7 @@ import java.util.Arrays;
 public class ConfigGUI extends FastInv {
 
     private final String configWordType = "config.type";
+    private final String configGameType = "config.vocal";
     private final String configTurnsPath = "config.turns";
     private final String configSavedPath = "config.saved";
     private final String configMisterWPath = "config.misterW";
@@ -25,7 +26,7 @@ public class ConfigGUI extends FastInv {
     private final String typeLore = "§8§oCliquez pour modifier la valeur";
     private final String lore1 = "§8§oClique gauche §a§o+1 §8§o| Click droit §c§o-1";
     private final String spawnLore = "§8§oCliquez pour vous §2§oéquipez§8§o de l'outil";
-    private final String mWhiteLore = "§8§oClique gauche §a§o✔ §8§o| Click droit §c§o✘";
+    private final String booleanLore = "§8§oClique gauche §a§o✔ §8§o| Click droit §c§o✘";
     private final String destroyLore = "§8§oCliquez pour §c§osupprimer§8§o tout les spawns";
     private final String asLore = "§8§oClique gauche §a§oafficher §8§o| Click droit §c§osupprimer";
     private final String saveConfigLore = "§8§oClique gauche §a§osave §8§o| Click droit §c§oreset";
@@ -57,6 +58,7 @@ public class ConfigGUI extends FastInv {
                 "§7Configuration: " + (Main.getInstance().getConfig().getBoolean(configSavedPath) ? "§a✔ Sauvegardée" : "§c✘ Pas sauvegardée"),
                 "§7Nombre de spawns: " + (Main.getInstance().getSpawns().isEmpty() ? "§c✘ Aucun spawn" : "§a✔ " + Main.getInstance().getSpawns().size() + " spawns"),
                 "§7Nombre de tours: §6" + Main.getInstance().getConfig().getInt(configTurnsPath) + "§7/§615",
+                "§7Type de partie: " + (Main.getInstance().getConfig().getBoolean(configGameType) ? "§eVocal" : "§fTextuelle"),
                 "§7Dictionnaire: " + (Main.getInstance().getConfig().getString(configWordType).equals("minecraft") ? "§a§lMin§6§lecraft" : "§9§lFr§f§lan§c§lce"),
                 "").build());
 
@@ -121,7 +123,7 @@ public class ConfigGUI extends FastInv {
             init(p);
         });
 
-        setItem(21, new ItemBuilder(HeadList.Walter_White.getItemStack()).name("§fM. White").lore(mWhiteLore, "",
+        setItem(21, new ItemBuilder(HeadList.Walter_White.getItemStack()).name("§fM. White").lore(booleanLore, "",
                 "§7Status: " + (Main.getInstance().getConfig().getBoolean(configMisterWPath) ? "§a✔" : "§c✘")).build(), e -> {
             e.setCancelled(true);
 
@@ -135,6 +137,34 @@ public class ConfigGUI extends FastInv {
                 Main.getInstance().getConfig().set(configMisterWPath, true);
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
             } else if (e.getClick() == ClickType.RIGHT) Main.getInstance().getConfig().set(configMisterWPath, false); p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
+
+            Main.getInstance().saveConfig();
+            init(p);
+        });
+
+        setItem(22, new ItemBuilder(Main.getInstance().getConfig().getBoolean(configGameType) ? Material.BELL : Material.PAPER).name("§fType de partie").lore(booleanLore, "",
+                "§7Status: " + (Main.getInstance().getConfig().getBoolean(configGameType) ? "§eVocal" : "§fTextuelle")).build(), e -> {
+            e.setCancelled(true);
+
+            if (e.getClick() == ClickType.LEFT) {
+                if (Main.getInstance().getConfig().getBoolean(configGameType)) {
+                    p.sendMessage("§c§lERREUR§7, Le mode §eVocal§7 est déjà défini !");
+                    p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+                    return;
+                }
+
+                Main.getInstance().getConfig().set(configGameType, true);
+                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
+            } else if (e.getClick() == ClickType.RIGHT) {
+                if (!Main.getInstance().getConfig().getBoolean(configGameType)) {
+                    p.sendMessage("§c§lERREUR§7, Le mode §fTextuelle§7 est déjà défini !");
+                    p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+                    return;
+                }
+
+                Main.getInstance().getConfig().set(configGameType, false);
+                p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1f, 1f);
+            }
 
             Main.getInstance().saveConfig();
             init(p);
@@ -228,6 +258,7 @@ public class ConfigGUI extends FastInv {
                 "§7Configuration: " + (Main.getInstance().getConfig().getBoolean(configSavedPath) ? "§a✔ Sauvegardée" : "§c✘ Pas sauvegardée"),
                 "§7Nombre de spawns: " + (Main.getInstance().getSpawns().isEmpty() ? "§c✘ Aucun spawn" : "§a✔ " + Main.getInstance().getSpawns().size() + " spawns"),
                 "§7Nombre de tours: §6" + Main.getInstance().getConfig().getInt(configTurnsPath) + "§7/§615",
+                "§7Type de partie: " + (Main.getInstance().getConfig().getBoolean(configGameType) ? "§eVocal" : "§fTextuelle"),
                 "§7Dictionnaire: " + (Main.getInstance().getConfig().getString(configWordType).equals("minecraft") ? "§a§lMin§6§lecraft" : "§9§lFr§f§lan§c§lce"),
                 "").build());
 

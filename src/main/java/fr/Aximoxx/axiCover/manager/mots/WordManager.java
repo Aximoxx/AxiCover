@@ -5,12 +5,16 @@ import fr.Aximoxx.axiCover.manager.Roles;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.boss.BarColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collections;
 import java.util.UUID;
 
 public class WordManager {
+    int timer = Main.getInstance().getGameManager().getTurnTimer();
+    BukkitRunnable task = Main.getInstance().getGameManager().getPlayerTurn();
 
     public void distributeWord() {
         Main.getInstance().getGameManager().setCurrentWord(Words.randomWords(Main.getInstance().getConfig().getString("config.type")));
@@ -69,7 +73,6 @@ public class WordManager {
             }
         }
 
-        Player first = Bukkit.getOnlinePlayers().stream().findFirst().orElse(null);
-        if (first != null) first.getInventory().setItem(0, new ItemBuilder(Material.ARROW).name("§cTermine ton tour").build());
+        Main.getInstance().getNextRoundManager().startPlayerNextTurn();
     }
 }
