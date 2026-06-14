@@ -56,8 +56,17 @@ public class GameCommands implements CommandExecutor {
                     }
                 }
             case "guess":
+                if (!Main.getInstance().getGameManager().isPlaying()){
+                    p.sendMessage("§c§lERREUR§7, Aucune partie en cours...");
+                    p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+                    return true;
+                }
+
                 if (Main.getInstance().getGameManager().getPlayerRoles().get(p.getUniqueId()) != Roles.MISTER_WHITE) {
-                    Bukkit.broadcastMessage("§c§l" + p.getName().toUpperCase() + "§7 À VOULU TRICHÉ(E) ! cheh");
+                    for (UUID id : Main.getInstance().getGameManager().getPlayers()){
+                        Player pls = Bukkit.getPlayer(id);
+                        if (pls != null) pls.sendMessage("§c§l" + p.getName().toUpperCase() + "§7 À VOULU TRICHÉ(E) ! cheh");
+                    }
                     p.sendMessage("§c§lERREUR§7, J'aime §cpas §7les §ctricheurs..");
                     p.playSound(p.getLocation(), Sound.ENTITY_WITCH_CELEBRATE, 1f, 1f);
                     return true;

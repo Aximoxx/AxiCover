@@ -14,6 +14,7 @@ public class GameManager {
     private Words currentWord;
     private BukkitRunnable task;
     private boolean playing = false;
+    private boolean votePhase = false;
     private final List<UUID> players = new ArrayList<>();
     private final Map<UUID, UUID> voteMap = new HashMap<>();
     private final List<UUID> turnPassed = new ArrayList<>();
@@ -52,6 +53,7 @@ public class GameManager {
     public List<UUID>        getPlayers()                { return players; }
     public Map<UUID, UUID>   getVoteMap()                { return voteMap; }
     public BossBar           getWhiteBar()               { return whiteBar; }
+    public boolean           isVotePhase()               { return votePhase; }
     public List<UUID>        getTurnPassed()             { return turnPassed; }
     public boolean           ismWhiteGuess()             { return mWhiteGuess; }
     public Map<UUID, Roles>  getPlayerRoles()            { return playerRoles; }
@@ -63,7 +65,8 @@ public class GameManager {
     public String            getCurrentCivilWord()       { return currentWord.getCivil(); }
     public String            getCurrentUndercoverWord()  { return currentWord.getUndercover(); }
 
-    public void setCurrentWord(Words currentWord)       { this.currentWord = currentWord; }
     public void setPlaying(boolean playing)             { this.playing = playing; }
+    public void setVotePhase(boolean votePhase)         { this.votePhase = votePhase; }
+    public void setCurrentWord(Words currentWord)       { this.currentWord = currentWord; }
     public void setMWhiteGuess(boolean mWhiteGuess)     { this.mWhiteGuess = mWhiteGuess; }
 }

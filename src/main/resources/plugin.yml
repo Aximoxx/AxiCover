@@ -1,13 +1,20 @@
 name: AxiCover
-description: $description
-version: '${version}'
-
+description: Le jeu Undercover mais dans Minecraft
+version: 1.0
 main: fr.Aximoxx.axiCover.Main
 api-version: '1.21'
+softdepend: [LuckPerms]
 
 authors: [ Aximox ]
 commands:
   config:
     description: Commande d'intéraction pour la config
+
   uc:
     description: Commandes pour le jeu
+  sethost:
+    description: Ajoute un joueur à la liste des Hosts
+    aliases: [sh]
+  removehost:
+    description: Retire un joueur de la liste des Hosts
+    aliases: [rh]

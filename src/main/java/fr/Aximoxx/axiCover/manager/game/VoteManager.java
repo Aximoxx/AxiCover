@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class VoteManager {
 
     public void startVotingPhase() {
+        Main.getInstance().getGameManager().setVotePhase(true);
         for (UUID id : Main.getInstance().getGameManager().getPlayerPlaying()) {
             Player p = Bukkit.getPlayer(id);
             if (p == null) continue;
@@ -34,6 +35,7 @@ public class VoteManager {
             @Override
             public void run() {
                 if (timer == 0) {
+                    Main.getInstance().getGameManager().setVotePhase(false);
                     Main.getInstance().getGameManager().getVoteBar().removeAll();
                     countVote();
                     cancel();
